@@ -1,5 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Dimensions, Image, TouchableHighlight, TouchableOpacity } from "react-native";
+import { secondLayer } from "../global/officialColors";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const HEIGHT = Dimensions.get("window").height;
 const WIDTH = Dimensions.get("window").width;
@@ -85,7 +87,7 @@ export default class Food extends React.Component {
                                 <Text style={{textAlign: "center",color: "#fff",fontSize: 16}}>Recipe</Text>
                             </TouchableHighlight>
                             <TouchableOpacity style={styles.like} onPress={() => this.setState({ liked: true })}>
-                                <Image source={(liked) ? require("../assets/heart_orange.png") : require("../assets/heart.png")} style={{height: 30,width: 30}} />
+                                <MaterialCommunityIcons name="heart-outline" size={35} color={secondLayer} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -107,6 +109,7 @@ const styles = StyleSheet.create({
     continer: {
         width: WIDTH,
         paddingTop: 10,
+        marginTop: -130
     },
     card: {
         height: 150,
@@ -116,7 +119,15 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         flexDirection: "row",
         overflow: "hidden",
-        marginBottom: 10,
+        marginBottom: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+        elevation: 24,
     },
     foodImage: {
         height: "100%",
@@ -141,7 +152,7 @@ const styles = StyleSheet.create({
     btn: {
         height: 45,
         width: 110,
-        backgroundColor: "#ffa726",
+        backgroundColor: secondLayer,
         borderRadius: 10,
         justifyContent: "center",
         alignItems: "center"

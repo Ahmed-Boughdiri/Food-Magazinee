@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Dimensions, ScrollView, Image, TouchableOpacity, TouchableHighlight } from "react-native";
+import { secondLayer } from "../global/officialColors";
 
 const HEIGHT = Dimensions.get("window").height;
 const WIDTH = Dimensions.get("window").width;
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     container: {
         paddingVertical: 10,
         width: WIDTH,
-        height: 260
+        height: 400
     },
     suggestionContainer: {
         height: 240,
@@ -52,6 +53,16 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         borderRadius: 15,
         overflow: "hidden",
+        shadowColor: "#000",
+    shadowOffset: {
+        width: 0,
+        height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.00,
+
+    elevation: 24,
+    marginVertical: 10
     },
     suggestionDesc: {
         height: 80,
@@ -78,7 +89,7 @@ const styles = StyleSheet.create({
     moreInfo: {
         height: 50,
         width: 50,
-        backgroundColor: "#ffa726",
+        backgroundColor: secondLayer,
         borderRadius: 15,
         marginLeft: 15,
         justifyContent: "center",

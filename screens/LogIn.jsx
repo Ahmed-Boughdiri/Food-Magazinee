@@ -5,7 +5,8 @@ import { Input, Btn } from "../component/FormComponents";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { emailVerif } from "../global/verif";
-
+import { firstLayer, secondLayer } from "../global/officialColors";
+import { Ionicons } from "@expo/vector-icons";
 
 export default class LogIn extends React.Component {
     constructor(props) {
@@ -27,10 +28,11 @@ export default class LogIn extends React.Component {
       }
 
     render(){
-
         return(
-            <LinearGradient colors={["#ffb75e", "#ffa726"]} style={styles.container}>
-                <Image source={require("../assets/logo.png")} style={{height: 200,width: 200}} />
+            <LinearGradient colors={[firstLayer, secondLayer]} style={styles.container}>
+                <View style={{ height: 170, width: 170, marginTop: 30, backgroundColor: "#fff",borderRadius: 100, justifyContent: "center",alignItems: "center" }}>
+                    <Ionicons name="ios-restaurant" size={100} color="#ff5722" />
+                </View>
                 <Text style={{...styles.brand,fontFamily: "Lobster"}}>Food Magazine</Text>
                 <View style={{alignItems: "center",marginTop: 15}}>
                     <Formik
@@ -39,23 +41,33 @@ export default class LogIn extends React.Component {
                            password: ""
                        }} 
                        onSubmit={(values) =>{
-                           console.log(values)
+                           this.props.navigation.navigate("Application")
                        }}
                        validationSchema = {this.validation}
                     >
                         {
                             (formikProps) =>(
                                 <View>
-                                    <Input icon={require("../assets/email.png")} name="Enter Your Email" changeHandler={formikProps.handleChange("email")} secureData={false} givenValue={formikProps.values.email} />
-                                    <Input icon={require("../assets/password.png")} name="Enter Your Password" changeHandler={formikProps.handleChange("password")} secureData={true} givenValue={formikProps.values.password} />
+                                    <Input icon="email" name="Enter Your Email" changeHandler={formikProps.handleChange("email")} secureData={false} givenValue={formikProps.values.email} />
+                                    <Input icon="password" name="Enter Your Password" changeHandler={formikProps.handleChange("password")} secureData={true} givenValue={formikProps.values.password} />
                                     <Btn name="Log in" onPressEvent={formikProps.handleSubmit} />
+                                    <TouchableOpacity style={{padding: 5}} onPress={() => this.props.navigation.navigate("SignUp")}>
+                                        <Text style={{textAlign: "center",color: "#fff",fontSize: 16}}>I don't have an Account</Text>
+                                    </TouchableOpacity>
+                                    <Text style={{
+                                        textAlign: "center",
+                                        color: "red",
+                                        marginTop: 2
+                                    }}>
+                                        {
+                                            formikProps.touched && formikProps.errors.email ||
+                                            formikProps.touched && formikProps.password
+                                        }
+                                    </Text>
                                 </View>
                             )
                         }
                     </Formik>
-                    <TouchableOpacity style={{padding: 10}} onPress={() => this.props.navigation.navigate("SignUp")}>
-                        <Text style={{textAlign: "center",color: "#fff",fontSize: 16}}>I don't have an Account</Text>
-                    </TouchableOpacity>
                 </View>
             </LinearGradient>
         )

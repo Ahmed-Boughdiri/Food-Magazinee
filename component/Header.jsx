@@ -1,5 +1,7 @@
 import React from "react"
 import { View, Text, StyleSheet, Dimensions, Image, TextInput, TouchableHighlight } from "react-native";
+import { secondLayer } from "../global/officialColors";
+import { FontAwesome5, Feather  } from "@expo/vector-icons";
 
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
@@ -39,8 +41,8 @@ export default class Header extends React.Component {
             <View>
                 <View style={styles.header}>
                     <View style={styles.topContainer}>
-                        <TouchableHighlight style={styles.burger} underlayColor="#ffa726" onPress={() => this.props.openTheDrawer()}>
-                            <Image source={require("../assets/burger.png")} style={{height: 50,width: 50}} />
+                        <TouchableHighlight style={styles.burger} underlayColor="transparent" onPress={() => this.props.openTheDrawer()}>
+                            <Feather name="bar-chart-2" size={35} color="#fff" />
                         </TouchableHighlight>
                         <Text style={{...styles.brand,fontFamily: "Lobster"}}>Food Magazine</Text>
                     </View>
@@ -50,7 +52,7 @@ export default class Header extends React.Component {
                             <TextInput placeholder="e.g: Burger, Pizza ...." style={styles.input} placeholderTextColor="#757575" />
                         </View>
                         <TouchableHighlight style={styles.notif} underlayColor="rgba(0,0,0,0)" onPress={() => this.setState({notifAvailable: !this.state.notifAvailable})}>
-                            <Image source={require("../assets/bell.png")} style={{height: 35,width: 35}} />
+                            <FontAwesome5 name="bell" size={30} color="#fff" />
                         </TouchableHighlight>
                     </View>
                 </View>
@@ -70,7 +72,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: "#ffa726"
+        backgroundColor: secondLayer
     },
     topContainer: {
         height: "50%",
@@ -85,6 +87,7 @@ const styles = StyleSheet.create({
         width: 60,
         justifyContent: "center",
         alignItems: "center",
+        transform: [{ rotate: "270deg" }]
     },
     brand: {
         textAlign: "center",

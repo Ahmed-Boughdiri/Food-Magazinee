@@ -5,6 +5,8 @@ import { Formik } from "formik";
 import { Input, Btn } from "../component/FormComponents";
 import * as yup from "yup";
 import { emailVerif } from "../global/verif";
+import { firstLayer, secondLayer } from "../global/officialColors";
+import { Ionicons } from "@expo/vector-icons";
 
 export default class SignUp extends React.Component {
     constructor(props) {
@@ -13,7 +15,7 @@ export default class SignUp extends React.Component {
           Lobster: require("../assets/Lobster.ttf"),
         });
         this.state = {
-            font: ""
+            font: "",
         }
         this.validation = yup.object({
             email: yup.string().required().test("emailVerif", "Your Email is Badly Formatted", (val) => emailVerif(val)),
@@ -28,8 +30,10 @@ export default class SignUp extends React.Component {
 
     render(){
         return(
-            <LinearGradient colors={["#ffb75e", "#ffa726"]} style={styles.container}>
-                <Image source={require("../assets/logo.png")} style={{height: 200,width: 200}} />
+            <LinearGradient colors={[firstLayer, secondLayer]} style={styles.container}>
+                <View style={{ height: 170, width: 170, marginTop: 30, backgroundColor: "#fff",borderRadius: 100, justifyContent: "center",alignItems: "center" }}>
+                    <Ionicons name="ios-restaurant" size={100} color="#ff5722" />
+                </View>
                 <Text style={{...styles.brand,fontFamily: "Lobster"}}>Food Magazine</Text>
                 <View style={{alignItems: "center",marginTop: 15}}>
                     <Formik
@@ -46,14 +50,18 @@ export default class SignUp extends React.Component {
                         {
                             (formikProps) =>(
                                 <View>
-                                    <Input name="Enter Your Email" icon={require("../assets/email.png")} changeHandler={formikProps.handleChange("email")} secureData={false} givenValue={formikProps.values.email} />
-                                    <Input name="Enter Your Password" icon={require("../assets/password.png")} changeHandler={formikProps.handleChange("password")} secureData={true} givenValue={formikProps.values.password} />
-                                    <Input name="Confirm Your Password" icon={require("../assets/password.png")} changeHandler={formikProps.handleChange("confirmPassword")} secureData={true} givenValue={formikProps.values.confirmPassword} />
+                                    <Input name="Enter Your Email" icon="email" changeHandler={formikProps.handleChange("email")} secureData={false} givenValue={formikProps.values.email} />
+                                    <Input name="Enter Your Password" icon="password" changeHandler={formikProps.handleChange("password")} secureData={true} givenValue={formikProps.values.password} />
+                                    <Input name="Confirm Your Password" icon="password" changeHandler={formikProps.handleChange("confirmPassword")} secureData={true} givenValue={formikProps.values.confirmPassword} />
                                     <Btn name="Sign up" onPressEvent={formikProps.handleSubmit} />
-                                    <Text>{
+                                    <Text style={{
+                                        textAlign: "center",
+                                        color: "red",
+                                        marginTop: 3
+                                    }}>{
                                         formikProps.touched && formikProps.errors.email ||
-                                        formikProps.touched && formikProps.errors.email ||
-                                        formikProps.touched && formikProps.errors.email     
+                                        formikProps.touched && formikProps.errors.password ||
+                                        formikProps.touched && formikProps.errors.confirmPassword   
                                     }</Text>
                                 </View>
                             )

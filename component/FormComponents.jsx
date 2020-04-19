@@ -1,14 +1,18 @@
 import React from "react";
-import { View, StyleSheet, TextInput, Image, TouchableHighlight, Text } from "react-native";
-
+import { View, StyleSheet, TextInput, Image, TouchableHighlight, Text, Animated, Easing, TouchableWithoutFeedback } from "react-native";
+import { EmailIcon, PasswordIcon } from "../global/icons";
+import { firstLayer } from "../global/officialColors";
+import AwesomeButton from "react-native-really-awesome-button";
 
 export const Input = ({ icon, name, changeHandler, secureData, givenValue }) =>{
     return(
         <View style={styles.inputContainer}>
             <View style={{height: 55,width: 55}}>
-                <Image source={require("../assets/input.png")} style={{height: 55,width: 70,position: "absolute",top: 0,left: 0,bottom: 0}} />
+                <Image source={require("../assets/input.png")} style={{height: 55,width: 70,position: "absolute",top: 0,left: -2,bottom: 0}} />
                 <View style={{height: "100%",width: "100%",position: "absolute",top: 0,left: 0,bottom: 0,justifyContent: "center",alignItems: "center"}}>
-                    <Image source={icon} style={{height: 35,width: 35}} />
+                    {
+                        (icon === "email") ? <EmailIcon /> : <PasswordIcon />
+                    } 
                 </View>
             </View>
             <TextInput placeholder={name} style={styles.input} placeholderTextColor="#757575" secureTextEntry={secureData} onChangeText={changeHandler} value={givenValue} />
@@ -16,11 +20,14 @@ export const Input = ({ icon, name, changeHandler, secureData, givenValue }) =>{
     )
 }
 
+
 export const Btn = ({ name, onPressEvent }) =>{
     return(
-        <TouchableHighlight style={styles.btn} onPress={onPressEvent}>
-            <Text style={{textAlign: "center",color: "#ffa726",fontSize: 17}}>{name}</Text>
-        </TouchableHighlight>
+        <AwesomeButton progress onPress={onPressEvent} activityColor={firstLayer} backgroundDarker="transparent" backgroundShadow="transparent" backgroundProgress="#fff" borderColor="transparent" borderRadius={100} borderWidth={0}>
+            <View style={styles.btn}>
+                <Text style={{textAlign: "center",color: firstLayer,fontSize: 17}}>{name}</Text>                                 
+            </View>
+        </AwesomeButton>
     )
 }
 
@@ -32,6 +39,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         flexDirection: "row",
         alignItems: "center",
+        marginBottom: 8
     },
     input: {
         height: 30,
@@ -44,10 +52,10 @@ const styles = StyleSheet.create({
         height: 55,
         width: 300,
         backgroundColor: "#fff",
-        borderRadius: 50,
         justifyContent: "center",
-        alignItems: "center"
-    }
+        alignItems: "center",
+        overflow: "hidden"
+    },
 })
 
 

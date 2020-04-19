@@ -4,12 +4,14 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  Image,
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
+import { firstLayer, secondLayer } from "../global/officialColors";
+import AwesomeButton from "react-native-really-awesome-button";
 
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
@@ -31,12 +33,11 @@ export default class Welcome extends React.Component {
 
   render() {
     return (
-      <LinearGradient colors={["#ffb75e", "#ffa726"]} style={styles.container}>
+      <LinearGradient colors={[firstLayer, secondLayer]} style={styles.container}>
         <View style={styles.topContainer}>
-          <Image
-            source={require("../assets/logo.png")}
-            style={{ height: 200, width: 200, marginTop: 100 }}
-          />
+          <View style={{ height: 170, width: 170, marginTop: 100, backgroundColor: "#fff",borderRadius: 100, justifyContent: "center",alignItems: "center" }}>
+            <Ionicons name="ios-restaurant" size={100} color="#ff5722" />
+          </View>
           <Text style={{ ...styles.brand, fontFamily: this.state.font }}>
             Food Magazine
           </Text>
@@ -49,14 +50,13 @@ export default class Welcome extends React.Component {
           <Text style={styles.subtitle}>
             Food Magazine The Best Place For Finding Recipes.
           </Text>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => this.props.navigation.navigate("LogIn")}
-          >
-            <Text style={{ textAlign: "center", color: "#fff", fontSize: 18 }}>
-              Get Started
-            </Text>
-          </TouchableOpacity>
+          <AwesomeButton onPress={() => this.props.navigation.navigate("LogIn")} activityColor={firstLayer} backgroundDarker="transparent" backgroundShadow="transparent" backgroundProgress="#fff" borderColor="transparent" borderRadius={100} borderWidth={0}>
+            <View style={styles.btn}>
+              <Text style={{ textAlign: "center", color: "#fff", fontSize: 18 }}>
+                Get Started
+              </Text>                                 
+            </View>
+          </AwesomeButton>
         </ImageBackground>
       </LinearGradient>
     );
@@ -106,13 +106,13 @@ const styles = StyleSheet.create({
     marginTop: 15,
     width: 300,
     fontSize: 18,
+    marginBottom: 20
   },
   btn: {
-    height: 63,
+    height: 65,
     width: 300,
-    backgroundColor: "#ffa726",
+    backgroundColor: secondLayer,
     borderRadius: 60,
-    marginTop: 20,
     justifyContent: "center",
     alignItems: "center",
   },
