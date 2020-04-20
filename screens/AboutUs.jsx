@@ -2,7 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { loadAsync } from "expo-font";
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, Ionicons } from "@expo/vector-icons";
+import { firstLayer, secondLayer } from "../global/officialColors";
 
 export default class AboutUs extends React.Component {
   constructor(props) {
@@ -22,11 +23,13 @@ export default class AboutUs extends React.Component {
 
   render() {
     return (
-      <LinearGradient colors={["#ffb75e", "#ffa726"]} style={styles.container}>
-        <Image
-          source={require("../assets/logo.png")}
-          style={{ height: 200, width: 200 }}
-        />
+      <LinearGradient
+        colors={[firstLayer, secondLayer]}
+        style={styles.container}
+      >
+        <View style={styles.logo}>
+          <Ionicons name="ios-restaurant" color={firstLayer} size={80} />
+        </View>
         <Text style={{ ...styles.brand, fontFamily: this.state.font }}>
           Food Magazine
         </Text>
@@ -36,11 +39,21 @@ export default class AboutUs extends React.Component {
           sequi, dolore, aut expedita animi, suscipit accusantium. Sunt numquam
           assumenda esse praesentium dolore!
         </Text>
-        <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate("Support")}>
-            <Text style={{textAlign: "center",color: "#ffa726",fontSize: 17}}>Contact Us</Text>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => this.props.navigation.navigate("Support")}
+        >
+          <Text
+            style={{ textAlign: "center", color: firstLayer, fontSize: 17 }}
+          >
+            Contact Us
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.cancel} onPress={() => this.props.navigation.goBack()}>
-            <Entypo name="cross" size={35} color="#fff" />
+        <TouchableOpacity
+          style={styles.cancel}
+          onPress={() => this.props.navigation.goBack()}
+        >
+          <Entypo name="cross" size={35} color="#fff" />
         </TouchableOpacity>
       </LinearGradient>
     );
@@ -73,13 +86,29 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 20
+    marginTop: 20,
   },
   cancel: {
     height: 50,
     width: 50,
     position: "absolute",
     top: 25,
-    left: 10
-  }
+    left: 10,
+  },
+  logo: {
+    height: 170,
+    width: 170,
+    backgroundColor: "#fff",
+    borderRadius: 200,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+    elevation: 24,
+  },
 });

@@ -7,14 +7,14 @@ import DrawerComponent from "../component/DrawerComponent";
 
 const Drawer = createDrawerNavigator();
 
-const Application = () =>{
-    return(
-        <Drawer.Navigator drawerContent={(props) => <DrawerComponent {...props} />}>
-            <Drawer.Screen name="Home" component={Home} />
-            <Drawer.Screen name="Favourites" component={Favourites} />
-            <Drawer.Screen name="Settings" component={Settings} />
-        </Drawer.Navigator>
-    )
-}
+const Application = () => {
+  return (
+    <Drawer.Navigator drawerContent={(props) => <DrawerComponent {...props} />}>
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Favourites" component={Favourites} />
+      <Drawer.Screen name="Settings" component={Settings} />
+    </Drawer.Navigator>
+  );
+};
 
 export default Application;

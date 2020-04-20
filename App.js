@@ -10,6 +10,7 @@ import EditInfoHeader from "./component/EditInfoHeader";
 import Recipe from "./screens/Recipe";
 import AboutUs from "./screens/AboutUs";
 import Support from "./screens/Support";
+import { secondLayer } from "./global/officialColors";
 
 const Stack = createStackNavigator();
 
@@ -32,7 +33,7 @@ const App = () =>{
         <Stack.Screen name="EditInfo" component={EditInfo} options={{
           headerStyle: {
             elevation: 0,
-            backgroundColor: "#ffa726"
+            backgroundColor: secondLayer
           },
           headerTitle: () => <EditInfoHeader />
         }} />

@@ -21,8 +21,7 @@ export default class Recipe extends React.Component {
         <ImageBackground
           source={require("../assets/food3.jpg")}
           style={styles.header}
-        >
-        </ImageBackground>
+        ></ImageBackground>
         <ScrollView style={styles.recipeContainer}>
           <View style={{ width: "80%", alignSelf: "center" }}>
             <Text style={styles.title}>Recipe Name</Text>
@@ -31,29 +30,35 @@ export default class Recipe extends React.Component {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
               eveniet rem nobis molestiae. Expedita laboriosam id labore eius,
               voluptate est nemo, nostrum nulla minima tempora, dolorem eos
-              dolore incidunt. Assumenda?
-
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
+              dolore incidunt. Assumenda? Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Assumenda eveniet rem nobis molestiae. Expedita
+              laboriosam id labore eius, voluptate est nemo, nostrum nulla
+              minima tempora, dolorem eos dolore incidunt. Assumenda? Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Assumenda
               eveniet rem nobis molestiae. Expedita laboriosam id labore eius,
               voluptate est nemo, nostrum nulla minima tempora, dolorem eos
-              dolore incidunt. Assumenda?
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-              eveniet rem nobis molestiae. Expedita laboriosam id labore eius,
-              voluptate est nemo, nostrum nulla minima tempora, dolorem eos
-              dolore incidunt. Assumenda?
-
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-              eveniet rem nobis molestiae. Expedita laboriosam id labore eius,
-              voluptate est nemo, nostrum nulla minima tempora, dolorem eos
-              dolore incidunt. Assumenda?
+              dolore incidunt. Assumenda? Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Assumenda eveniet rem nobis molestiae. Expedita
+              laboriosam id labore eius, voluptate est nemo, nostrum nulla
+              minima tempora, dolorem eos dolore incidunt. Assumenda?
             </Text>
           </View>
           <TouchableOpacity style={styles.btn}>
-            <View style={{flexDirection: "row"}}>
-                <Entypo name="heart" color="#fff" size={30} />
-                <Text style={{textAlign: "center",color: "#fff",fontSize: 17,marginLeft: 10,marginTop: 3}}>Put in The Favourite</Text>
+            <View style={{ flexDirection: "row" }}>
+              <Entypo name="heart" color="#fff" size={30} />
+              <Text
+                style={{
+                  textAlign: "center",
+                  color: "#fff",
+                  fontSize: 17,
+                  marginLeft: 10,
+                  marginTop: 3,
+                }}
+              >
+                Put in The Favourite
+              </Text>
             </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
         </ScrollView>
       </View>
     );
@@ -72,7 +77,7 @@ const styles = StyleSheet.create({
   recipeContainer: {
     width: WIDTH,
     paddingTop: 20,
-    },
+  },
   title: {
     textAlign: "left",
     fontSize: 25,
@@ -93,6 +98,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 40,
     alignSelf: "center",
-    marginBottom: 60
-  }
+    marginBottom: 60,
+  },
 });

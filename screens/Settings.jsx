@@ -1,18 +1,10 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableHighlight,
-  Dimensions,
-  Image,
-  Switch,
-  Modal
-} from "react-native";
+import { View, StyleSheet, Dimensions, Switch, Modal } from "react-native";
 import { loadAsync } from "expo-font";
 import { Switcher, Setting } from "../component/Setting";
 import SignOutConfirm from "../component/SignOutConfirm";
+import { secondLayer } from "../global/officialColors";
+import AppHeader from "../component/AppHeader";
 
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
@@ -38,26 +30,17 @@ export default class Settings extends React.Component {
   goToAboutUs = () => this.props.navigation.navigate("AboutUs");
   goToSupport = () => this.props.navigation.navigate("Support");
   showSignOutConfirm = () => this.setState({ signOut: true });
-  cancelSignOut = () => this.setState({ signOut: false })
+  cancelSignOut = () => this.setState({ signOut: false });
+  goToWelcome = () => {
+    this.setState({ signOut: false });
+    this.props.navigation.navigate("Welcome");
+  };
+  openDrawer = () => this.props.navigation.openDrawer();
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <TouchableHighlight
-          underlayColor="#e65100"
-            style={styles.drawer}
-            onPress={() => this.props.navigation.openDrawer()}
-          >
-            <Image
-              source={require("../assets/burger.png")}
-              style={{ height: 50, width: 50, marginTop: 5 }}
-            />
-          </TouchableHighlight>
-          <Text style={{ ...styles.title, fontFamily: "Lobster" }}>
-            Settings
-          </Text>
-        </View>
+        <AppHeader name="Settings" openDrawer={this.openDrawer} />
         <View style={styles.settingsContainer}>
           <Setting
             name="Account"
@@ -108,8 +91,15 @@ export default class Settings extends React.Component {
             onPressEvent={this.showSignOutConfirm}
           />
         </View>
-        <Modal visible={this.state.signOut} transparent={true} animationType="slide">
-          <SignOutConfirm cancelSignOut={this.cancelSignOut} />
+        <Modal
+          visible={this.state.signOut}
+          transparent={true}
+          animationType="slide"
+        >
+          <SignOutConfirm
+            cancelSignOut={this.cancelSignOut}
+            goToWelcome={this.goToWelcome}
+          />
         </Modal>
       </View>
     );
@@ -122,8 +112,8 @@ const styles = StyleSheet.create({
   },
   header: {
     width: WIDTH,
-    height: 100,
-    backgroundColor: "#ffa726",
+    height: 85,
+    backgroundColor: secondLayer,
     flexDirection: "row",
     paddingHorizontal: 10,
     alignItems: "flex-end",
@@ -134,6 +124,7 @@ const styles = StyleSheet.create({
     width: 70,
     justifyContent: "center",
     alignItems: "center",
+    transform: [{ rotate: "270deg" }],
   },
   title: {
     textAlign: "left",

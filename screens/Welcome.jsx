@@ -4,8 +4,7 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  ImageBackground,
-  TouchableOpacity,
+  ImageBackground
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Font from "expo-font";
@@ -19,23 +18,27 @@ const HEIGHT = Dimensions.get("window").height;
 export default class Welcome extends React.Component {
   constructor(props) {
     super(props);
-    this.loadFonts = async() => await Font.loadAsync({
-      Lobster: require("../assets/Lobster.ttf"),
-    });
+    this.loadFonts = async () =>
+      await Font.loadAsync({
+        Lobster: require("../assets/Lobster.ttf"),
+      });
     this.state = {
-      font: ""
-    }
+      font: "",
+    };
   }
 
-  componentWillMount(){
-    this.loadFonts().then(() => this.setState({font: "Lobster"}));
+  componentWillMount() {
+    this.loadFonts().then(() => this.setState({ font: "Lobster" }));
   }
 
   render() {
     return (
-      <LinearGradient colors={[firstLayer, secondLayer]} style={styles.container}>
+      <LinearGradient
+        colors={[firstLayer, secondLayer]}
+        style={styles.container}
+      >
         <View style={styles.topContainer}>
-          <View style={{ height: 170, width: 170, marginTop: 100, backgroundColor: "#fff",borderRadius: 100, justifyContent: "center",alignItems: "center" }}>
+          <View style={styles.logo}>
             <Ionicons name="ios-restaurant" size={100} color="#ff5722" />
           </View>
           <Text style={{ ...styles.brand, fontFamily: this.state.font }}>
@@ -50,11 +53,22 @@ export default class Welcome extends React.Component {
           <Text style={styles.subtitle}>
             Food Magazine The Best Place For Finding Recipes.
           </Text>
-          <AwesomeButton onPress={() => this.props.navigation.navigate("LogIn")} activityColor={firstLayer} backgroundDarker="transparent" backgroundShadow="transparent" backgroundProgress="#fff" borderColor="transparent" borderRadius={100} borderWidth={0}>
+          <AwesomeButton
+            onPress={() => this.props.navigation.navigate("LogIn")}
+            activityColor={firstLayer}
+            backgroundDarker="transparent"
+            backgroundShadow="transparent"
+            backgroundProgress="#fff"
+            borderColor="transparent"
+            borderRadius={100}
+            borderWidth={0}
+          >
             <View style={styles.btn}>
-              <Text style={{ textAlign: "center", color: "#fff", fontSize: 18 }}>
+              <Text
+                style={{ textAlign: "center", color: "#fff", fontSize: 18 }}
+              >
                 Get Started
-              </Text>                                 
+              </Text>
             </View>
           </AwesomeButton>
         </ImageBackground>
@@ -106,7 +120,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     width: 300,
     fontSize: 18,
-    marginBottom: 20
+    marginBottom: 20,
   },
   btn: {
     height: 65,
@@ -115,5 +129,22 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     justifyContent: "center",
     alignItems: "center",
+  },
+  logo: {
+    height: 170,
+    width: 170,
+    marginTop: 100,
+    backgroundColor: "#fff",
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+    elevation: 24,
   },
 });
