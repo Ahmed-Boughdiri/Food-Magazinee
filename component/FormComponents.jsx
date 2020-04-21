@@ -4,15 +4,12 @@ import {
   StyleSheet,
   TextInput,
   Image,
-  TouchableHighlight,
   Text,
-  Animated,
-  Easing,
-  TouchableWithoutFeedback,
 } from "react-native";
 import { EmailIcon, PasswordIcon } from "../global/icons";
 import { firstLayer } from "../global/officialColors";
 import AwesomeButton from "react-native-really-awesome-button";
+import Touchable from "react-native-platform-touchable";
 
 export const Input = ({
   icon,
@@ -64,23 +61,13 @@ export const Input = ({
 
 export const Btn = ({ name, onPressEvent }) => {
   return (
-    <AwesomeButton
-      progress
-      onPress={onPressEvent}
-      activityColor={firstLayer}
-      backgroundDarker="transparent"
-      backgroundShadow="transparent"
-      backgroundProgress="#fff"
-      borderColor="transparent"
-      borderRadius={100}
-      borderWidth={0}
-    >
-      <View style={styles.btn}>
+    <Touchable onPress={onPressEvent}  style={styles.btn}>
+      <View>
         <Text style={{ textAlign: "center", color: firstLayer, fontSize: 17 }}>
           {name}
         </Text>
       </View>
-    </AwesomeButton>
+    </Touchable>
   );
 };
 
@@ -108,5 +95,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
+    borderRadius: 100
   },
 });

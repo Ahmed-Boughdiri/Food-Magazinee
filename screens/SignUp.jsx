@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Formik } from "formik";
 import { Input, Btn } from "../component/FormComponents";
@@ -7,6 +7,8 @@ import * as yup from "yup";
 import { emailVerif } from "../global/verif";
 import { firstLayer, secondLayer } from "../global/officialColors";
 import { Ionicons } from "@expo/vector-icons";
+import { passwordCorrespond } from "../global/verif";
+import { signUpUser, signUpSuccess } from "../global/authentification.js";
 
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -53,8 +55,17 @@ export default class SignUp extends React.Component {
               password: "",
               confirmPassword: "",
             }}
-            onSubmit={(values) => {
-              console.log(values);
+            onSubmit={(values, action) => {
+              if(passwordCorrespond(values.password,values.confirmPassword)) {
+                signUpUser(values.email,values.password).then(() =>{
+                  if(signUpSuccess){
+                    this.props.navigation.navigate("Application")
+                  }
+                })
+              }else {
+                Alert.alert("Password Error", "The Two Passwords That You Have Entered are Not Correspondent");
+                action.resetForm();
+              }
             }}
             validationSchema={this.validation}
           >

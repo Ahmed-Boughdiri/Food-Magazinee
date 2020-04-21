@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { emailVerif } from "../global/verif";
 import { firstLayer, secondLayer } from "../global/officialColors";
 import { Ionicons } from "@expo/vector-icons";
+import { registerUser, signInSuccess } from "../global/authentification";
 
 export default class LogIn extends React.Component {
   constructor(props) {
@@ -52,7 +53,11 @@ export default class LogIn extends React.Component {
               password: "",
             }}
             onSubmit={(values) => {
-              this.props.navigation.navigate("Application");
+              registerUser(values.email,values.password).then(() =>{
+                if(signInSuccess){
+                  this.props.navigation.navigate("Application")
+                }
+              })
             }}
             validationSchema={this.validation}
           >

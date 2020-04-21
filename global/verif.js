@@ -9,3 +9,5 @@ export const emailVerif = (val) => {
   }
   return test;
 };
+
+export const passwordCorrespond = (password, confirmPassword) => (password === confirmPassword) ? true : false;
