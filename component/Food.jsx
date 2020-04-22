@@ -10,6 +10,8 @@ import {
 import { secondLayer } from "../global/officialColors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Touchable from "react-native-platform-touchable";
+import { food } from "../global/getSuggestions";
+import { manipulate } from "../global/manipulate";
 
 const HEIGHT = Dimensions.get("window").height;
 const WIDTH = Dimensions.get("window").width;
@@ -93,8 +95,8 @@ export default class Food extends React.Component {
         <View style={styles.card}>
           <Image source={img} style={styles.foodImage} />
           <View style={{ justifyContent: "center", paddingHorizontal: 15 }}>
-            <Text style={styles.foodLabel}>{name}</Text>
-            <Text style={styles.foodDes}>{label}</Text>
+            <Text style={styles.foodLabel}>{manipulate(name)}</Text>
+            <Text style={styles.foodDes}>{manipulate(label)}</Text>
             <Text style={styles.foodCalories}>Calories: {calories}</Text>
             <View style={{ flexDirection: "row", marginTop: 15 }}>
               <Touchable
@@ -126,15 +128,14 @@ export default class Food extends React.Component {
 
     return (
       <View style={styles.continer}>
-        {this.state.food.map((fod) => (
+        {food.map((fod) => (
           <FoodCard
-            key={fod.key}
-            name={fod.foodName}
-            label={fod.label}
-            calories={fod.calories}
-            img={fod.img}
+            key={fod.yield}
+            name={fod.label}
+            label={fod.source}
+            calories={Math.floor(fod.calories)}
+            img={{uri: fod.image}}
             goToRecipe={this.props.goToRecipe}
-            liked={fod.liked}
           />
         ))}
       </View>

@@ -38,17 +38,12 @@ export const signUpUser = async(email,password) =>{
 }
 
 export let signInSuccess = false; 
-let userCred = {};
 
 export const registerUser = async(email,password) =>{
     await firebase.auth().signInWithEmailAndPassword(email,password).then((user) =>{
-        userCred = user.user;
         signInSuccess = true;
     }).catch(error =>{
         alert(error)
         signInSuccess = false;
     });
-    if(signInSuccess){
-        await AsyncStorage.setItem("userInfo",userCred);
-    }
 }

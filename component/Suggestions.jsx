@@ -10,6 +10,8 @@ import {
 import { secondLayer } from "../global/officialColors";
 import Touchable from "react-native-platform-touchable";
 import { MaterialIcons } from "@expo/vector-icons";
+import { sugg } from "../global/getSuggestions";
+import { manipulate } from "../global/manipulate";
 
 const WIDTH = Dimensions.get("window").width;
 
@@ -24,7 +26,7 @@ export default class Suggestions extends React.Component {
               style={{
                 flexDirection: "row",
                 alignItems: "center",
-                width: "70%",
+                width: "85%",
                 justifyContent: "space-between",
               }}
             >
@@ -32,14 +34,14 @@ export default class Suggestions extends React.Component {
                 <Text
                   style={{ ...styles.suggestionName, fontFamily: "Lobster" }}
                 >
-                  {name}
+                  {manipulate(name)}
                 </Text>
                 <Text style={styles.suggestionInfo}>Calories: {calories}</Text>
               </View>
               <Touchable
                 style={styles.moreInfo}
                 underlayColor="#e65100"
-                onPress={goToRecipe}
+                onPress={() => console.log(sugg)}
               >
                 <MaterialIcons name="add-box" color={secondLayer} size={55} />
               </Touchable>
@@ -56,30 +58,17 @@ export default class Suggestions extends React.Component {
           style={{ height: "100%" }}
           showsHorizontalScrollIndicator={false}
         >
-          <SuggestionCard
-            img={require("../assets/sug_1.jpg")}
-            name="Stick Meal"
-            calories="200"
-            goToRecipe={this.props.goToRecipe}
-          />
-          <SuggestionCard
-            img={require("../assets/sug_2.jpg")}
-            name="Pizza"
-            calories="400"
-            goToRecipe={this.props.goToRecipe}
-          />
-          <SuggestionCard
-            img={require("../assets/sug_3.jpg")}
-            name="Chcken"
-            calories="188"
-            goToRecipe={this.props.goToRecipe}
-          />
-          <SuggestionCard
-            img={require("../assets/sug_4.jpg")}
-            name="Chawarma"
-            calories="635"
-            goToRecipe={this.props.goToRecipe}
-          />
+          {
+          sugg.map(sug =>(
+            <SuggestionCard
+            key={sug.yield}
+              img={{uri: sug.image}}
+              name={sug.label}
+              calories={Math.floor(sug.calories)}
+              goToRecipe={this.props.goToRecipe}
+            />
+          ))
+        }
         </ScrollView>
       </View>
     );
