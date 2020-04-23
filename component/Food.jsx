@@ -12,6 +12,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Touchable from "react-native-platform-touchable";
 import { food } from "../global/getSuggestions";
 import { manipulate } from "../global/manipulate";
+import { handleRecipe } from "../global/handleRecipe";
 
 const HEIGHT = Dimensions.get("window").height;
 const WIDTH = Dimensions.get("window").width;
@@ -19,77 +20,16 @@ const WIDTH = Dimensions.get("window").width;
 export default class Food extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      food: [
-        {
-          foodName: "Japanese Food",
-          calories: 200,
-          label: "Very Delicious",
-          liked: false,
-          img: require("../assets/food1.jpg"),
-          key: 1,
-        },
-        {
-          foodName: "Japanese Food",
-          calories: 200,
-          label: "Very Delicious",
-          liked: false,
-          img: require("../assets/food2.jpg"),
-          key: 2,
-        },
-        {
-          foodName: "Japanese Food",
-          calories: 200,
-          label: "Very Delicious",
-          liked: false,
-          img: require("../assets/food3.jpg"),
-          key: 3,
-        },
-        {
-          foodName: "Japanese Food",
-          calories: 200,
-          label: "Very Delicious",
-          liked: false,
-          img: require("../assets/food4.jpg"),
-          key: 4,
-        },
-        {
-          foodName: "Japanese Food",
-          calories: 200,
-          label: "Very Delicious",
-          liked: false,
-          img: require("../assets/food5.jpg"),
-          key: 5,
-        },
-        {
-          foodName: "Japanese Food",
-          calories: 200,
-          label: "Very Delicious",
-          liked: false,
-          img: require("../assets/food6.jpg"),
-          key: 6,
-        },
-        {
-          foodName: "Japanese Food",
-          calories: 200,
-          label: "Very Delicious",
-          liked: false,
-          img: require("../assets/food7.png"),
-          key: 7,
-        },
-      ],
-    };
   }
 
   render() {
     const FoodCard = ({
-      key,
       name,
       label,
       calories,
       img,
       goToRecipe,
-      liked,
+      genInfo
     }) => {
       return (
         <View style={styles.card}>
@@ -102,7 +42,10 @@ export default class Food extends React.Component {
               <Touchable
                 style={styles.btn}
                 underlayColor="#e65100"
-                onPress={goToRecipe}
+                onPress={() =>{
+                  handleRecipe(genInfo);
+                  goToRecipe();
+                }}
               >
                 <Text
                   style={{ textAlign: "center", color: "#fff", fontSize: 16 }}
@@ -136,6 +79,7 @@ export default class Food extends React.Component {
             calories={Math.floor(fod.calories)}
             img={{uri: fod.image}}
             goToRecipe={this.props.goToRecipe}
+            genInfo={fod}
           />
         ))}
       </View>

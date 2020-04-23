@@ -10,40 +10,42 @@ import {
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { Caption } from "react-native-paper";
+import Touchable from "react-native-platform-touchable";
+import { secondLayer } from "../global/officialColors";
+import { recipe } from "../global/handleRecipe";
 
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
 
 export default class Recipe extends React.Component {
   render() {
+    var i = 0;
     return (
       <View style={styles.container}>
         <ImageBackground
-          source={require("../assets/food3.jpg")}
+          source={{ uri: recipe.image }}
           style={styles.header}
         ></ImageBackground>
         <ScrollView style={styles.recipeContainer}>
           <View style={{ width: "80%", alignSelf: "center" }}>
-            <Text style={styles.title}>Recipe Name</Text>
-            <Caption style={{ fontSize: 17 }}>Food Label</Caption>
-            <Text style={styles.recipe}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-              eveniet rem nobis molestiae. Expedita laboriosam id labore eius,
-              voluptate est nemo, nostrum nulla minima tempora, dolorem eos
-              dolore incidunt. Assumenda? Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Assumenda eveniet rem nobis molestiae. Expedita
-              laboriosam id labore eius, voluptate est nemo, nostrum nulla
-              minima tempora, dolorem eos dolore incidunt. Assumenda? Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-              eveniet rem nobis molestiae. Expedita laboriosam id labore eius,
-              voluptate est nemo, nostrum nulla minima tempora, dolorem eos
-              dolore incidunt. Assumenda? Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Assumenda eveniet rem nobis molestiae. Expedita
-              laboriosam id labore eius, voluptate est nemo, nostrum nulla
-              minima tempora, dolorem eos dolore incidunt. Assumenda?
-            </Text>
+            <Text style={styles.title}>{recipe.name}</Text>
+            <Caption style={{ fontSize: 17 }}>{recipe.label}</Caption>
+            <View style={styles.recipe}>
+              <Text style={styles.DescTitle}>Ingredients: </Text>
+              {
+                recipe.ingredients.map(ing =>(
+                    <Text style={styles.line}>{ i++ + ") "  + ing.text }</Text>
+                ))
+              }
+              <Text style={{...styles.DescTitle,marginTop: 20}}>totalNutrients</Text>
+              {
+                recipe.totalNutrients.map(nut =>(
+                  <Text>- {nut.label + ": " + Math.floor(nut.quantity) + nut.unit}</Text>
+                ))
+              }
+            </View>
           </View>
-          <TouchableOpacity style={styles.btn}>
+          <Touchable style={styles.btn} onPress={() => console.log(recipe)}>
             <View style={{ flexDirection: "row" }}>
               <Entypo name="heart" color="#fff" size={30} />
               <Text
@@ -58,7 +60,7 @@ export default class Recipe extends React.Component {
                 Put in The Favourite
               </Text>
             </View>
-          </TouchableOpacity>
+          </Touchable>
         </ScrollView>
       </View>
     );
@@ -85,19 +87,29 @@ const styles = StyleSheet.create({
     color: "#000",
   },
   recipe: {
-    textAlign: "left",
-    fontSize: 16,
-    color: "#000",
     marginTop: 35,
   },
   btn: {
     height: 60,
     width: "80%",
-    backgroundColor: "#ffa726",
+    backgroundColor: secondLayer,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 40,
     alignSelf: "center",
     marginBottom: 60,
   },
+  line: {
+    width: "100%",
+    textAlign: "left",
+    fontSize: 16,
+    color: "#000",
+    marginBottom: 5
+  },
+  DescTitle: {
+    textAlign: "left",
+    fontWeight: "bold",
+    marginBottom: 20,
+    fontSize: 25
+  }
 });

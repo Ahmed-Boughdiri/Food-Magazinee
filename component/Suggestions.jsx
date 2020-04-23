@@ -12,12 +12,13 @@ import Touchable from "react-native-platform-touchable";
 import { MaterialIcons } from "@expo/vector-icons";
 import { sugg } from "../global/getSuggestions";
 import { manipulate } from "../global/manipulate";
+import { handleRecipe } from "../global/handleRecipe";
 
 const WIDTH = Dimensions.get("window").width;
 
 export default class Suggestions extends React.Component {
   render() {
-    const SuggestionCard = ({ img, name, calories, goToRecipe }) => {
+    const SuggestionCard = ({ img, name, calories, goToRecipe, food }) => {
       return (
         <View style={styles.suggestionContainer}>
           <Image source={img} style={{ height: "100%", width: "100%" }} />
@@ -41,7 +42,10 @@ export default class Suggestions extends React.Component {
               <Touchable
                 style={styles.moreInfo}
                 underlayColor="#e65100"
-                onPress={() => console.log(sugg)}
+                onPress={() =>{
+                  handleRecipe(food);
+                  goToRecipe();
+                }}
               >
                 <MaterialIcons name="add-box" color={secondLayer} size={55} />
               </Touchable>
@@ -61,11 +65,12 @@ export default class Suggestions extends React.Component {
           {
           sugg.map(sug =>(
             <SuggestionCard
-            key={sug.yield}
+              key={sug.yield}
               img={{uri: sug.image}}
               name={sug.label}
               calories={Math.floor(sug.calories)}
               goToRecipe={this.props.goToRecipe}
+              food={sug}
             />
           ))
         }
