@@ -13,6 +13,7 @@ import { Caption } from "react-native-paper";
 import Touchable from "react-native-platform-touchable";
 import { secondLayer } from "../global/officialColors";
 import { recipe } from "../global/handleRecipe";
+import { putInTheFavourites, handleFavourites } from "../global/handleFavourites";
 
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
@@ -45,7 +46,10 @@ export default class Recipe extends React.Component {
               }
             </View>
           </View>
-          <Touchable style={styles.btn} onPress={() => console.log(recipe)}>
+          <Touchable style={styles.btn} onPress={() =>{
+            putInTheFavourites(recipe);
+            handleFavourites();
+          }}>
             <View style={{ flexDirection: "row" }}>
               <Entypo name="heart" color="#fff" size={30} />
               <Text

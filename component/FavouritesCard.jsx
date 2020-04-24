@@ -3,11 +3,12 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { secondLayer } from "../global/officialColors";
 import Touchable from "react-native-platform-touchable";
+import { removeFromFavourites } from "../global/handleFavourites";
 
 export const FavouriteCard = ({ name, label, calories, img, goToRecipe }) => {
   return (
     <View style={styles.favouriteCard}>
-      <Image source={img} style={styles.cardImg} />
+      <Image source={{ uri: img }} style={styles.cardImg} />
       <View style={styles.cardDescContainer}>
         <View
           style={{
@@ -24,7 +25,7 @@ export const FavouriteCard = ({ name, label, calories, img, goToRecipe }) => {
               fontWeight: "bold",
             }}
           >
-            {name} -{" "}
+            {name} -
           </Text>
           <Text
             style={{
@@ -53,7 +54,7 @@ export const FavouriteCard = ({ name, label, calories, img, goToRecipe }) => {
           </Text>
         </Touchable>
       </View>
-      <TouchableOpacity style={styles.delete}>
+      <TouchableOpacity style={styles.delete} onPress={() => removeFromFavourites(name)}>
         <Entypo name="circle-with-cross" color="#000" size={25} />
       </TouchableOpacity>
     </View>
@@ -62,7 +63,7 @@ export const FavouriteCard = ({ name, label, calories, img, goToRecipe }) => {
 
 const styles = StyleSheet.create({
   favouriteCard: {
-    height: 300,
+    height: 450,
     width: 320,
     backgroundColor: "#000",
     borderRadius: 20,
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     elevation: 24,
   },
   cardImg: {
-    height: "100%",
+    height: 300,
     width: "100%",
     position: "absolute",
     top: 0,

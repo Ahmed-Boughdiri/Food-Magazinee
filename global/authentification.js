@@ -1,6 +1,7 @@
 import * as firebase from "firebase";
 import axios from "axios";
-import { AsyncStorage } from "react-native";
+
+export let userID = "";
 
 try{
     firebase.initializeApp({
@@ -25,11 +26,12 @@ export const signUpUser = async(email,password) =>{
             email: email,
             id: cred.user.uid,
             favourites: [{
-                foodName: "null"
+                name: "null"
             }],
             userName: "user" + Math.floor((Math.random() * 1000) + 1)
         }
         axios.post("https://us-central1-food-magazine-6e38c.cloudfunctions.net/CreateUser",{user: user});
+        userID = cred.user.uid;
         signUpSuccess = true;
     }).catch(error =>{
         alert(error)
@@ -40,7 +42,8 @@ export const signUpUser = async(email,password) =>{
 export let signInSuccess = false; 
 
 export const registerUser = async(email,password) =>{
-    await firebase.auth().signInWithEmailAndPassword(email,password).then((user) =>{
+    await firebase.auth().signInWithEmailAndPassword(email,password).then(user =>{
+        userID = user.user.uid;
         signInSuccess = true;
     }).catch(error =>{
         alert(error)
